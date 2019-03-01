@@ -12,17 +12,12 @@ class App extends Component {
       id: this.state.todos.length ? this.state.todos[this.state.todos.length - 1].id + 1 : 1})});
   }
   removeTodo = () => {
-    this.setState({todos: this.state.todos.filter(todo => {
-      return todo.id !== this.state.todos[this.state.todos.length - 1].id;
-    })});
+    this.setState({todos: this.state.todos.slice(0, -1)});
   }
   clearTodos = () => {
     this.setState({todos: []});
   }
   render() {
-    const todos = this.state.todos.map(todo => {
-      return <TaskCard id={todo.id} key={todo.id}/>;
-    })
     return (
       <div>
         <ControlButtons 
@@ -31,7 +26,7 @@ class App extends Component {
           clear={this.clearTodos} 
         />
         <div className='mt-3 h-100 d-flex flex-column align-items-center'>
-          {todos}
+          {this.state.todos.map(todo => <TaskCard id={todo.id} key={todo.id}/>)}
         </div>
       </div>
     );
