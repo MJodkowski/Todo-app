@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import TaskCard from './components/TaskCard';
-import ControlButtons from './components/ControlButtons';
+import TaskCard from './components/TaskCard/TaskCard';
+import ControlButtons from './components/ControlButtons/ControlButtons';
 import "./index.css";
 
 class App extends Component {
@@ -20,6 +20,9 @@ class App extends Component {
   render() {
     return (
       <div>
+        <header className="d-flex justify-content-center">
+          <h1 className="h1-responsive font-weight-bold blue-text mt-3">TODO APP</h1>
+        </header>
         <ControlButtons 
           add={this.addTodo} 
           remove={this.removeTodo} 
