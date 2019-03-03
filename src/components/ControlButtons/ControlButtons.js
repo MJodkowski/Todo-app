@@ -1,7 +1,7 @@
 import React from 'react';
-import { MDBBtn, MDBContainer} from 'mdbreact';
+import { MDBBtn, MDBContainer } from 'mdbreact';
 
-export default ({add, remove, clear}) => {
+export default ({ add, remove, clear }) => {
     return (
         <MDBContainer fluid className='mt-3 d-flex justify-content-center'>
             <MDBBtn id='add' className='px-4 py-sm-3 px-sm-5' outline color='primary' onClick={add}>Add</MDBBtn>
