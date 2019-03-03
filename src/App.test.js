@@ -41,7 +41,7 @@ describe('<App />', () => {
 describe('<App />', () => {
     let wrapper;
     beforeEach(() => {
-        wrapper = mount(<App />);
+        wrapper = shallow(<App />);
     });
     it('should render no cards when state todos is empty', () => {
         expect(wrapper.find(TaskCard)).toHaveLength(0);
