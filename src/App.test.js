@@ -12,44 +12,46 @@ describe('<App />', () => {
     beforeEach(() => {
         wrapper = mount(<App />);
     });
-    it('should increment todo id in state when button is clicked', () => {
-        wrapper.find(MDBBtn).filter({ id: 'add' }).simulate('click');
-        expect(wrapper.state().todos).toEqual([{ id: 1 }]);
+    describe('<App /> methods', () => {
+        it('should add object with incremented id to state.todo when button is clicked', () => {
+            wrapper.find(MDBBtn).filter({ id: 'add' }).simulate('click');
+            expect(wrapper.state().todos).toEqual([{ id: 1 }]);
 
-        wrapper.setState({ todos: [{ id: 1 }, { id: 2 }] });
-        wrapper.find(MDBBtn).filter({ id: 'add' }).simulate('click');
-        expect(wrapper.state().todos).toEqual([{ id: 1 }, { id: 2 }, { id: 3 }]);
-    })
-    it('should increment todo id in state when button is clicked', () => {
-        wrapper.find(MDBBtn).filter({ id: 'remove' }).simulate('click');
-        expect(wrapper.state().todos).toEqual([]);
+            wrapper.setState({ todos: [{ id: 1 }, { id: 2 }] });
+            wrapper.find(MDBBtn).filter({ id: 'add' }).simulate('click');
+            expect(wrapper.state().todos).toEqual([{ id: 1 }, { id: 2 }, { id: 3 }]);
+        })
+        it('should remove last todo object from state.todos when button is clicked', () => {
+            wrapper.find(MDBBtn).filter({ id: 'remove' }).simulate('click');
+            expect(wrapper.state().todos).toEqual([]);
 
-        wrapper.setState({ todos: [{ id: 1 }, { id: 2 }] });
-        wrapper.find(MDBBtn).filter({ id: 'remove' }).simulate('click');
-        expect(wrapper.state().todos).toEqual([{ id: 1 }]);
-    })
-    it('should increment todo id in state when button is clicked', () => {
-        wrapper.find(MDBBtn).filter({ id: 'clear' }).simulate('click');
-        expect(wrapper.state().todos).toEqual([]);
+            wrapper.setState({ todos: [{ id: 1 }, { id: 2 }] });
+            wrapper.find(MDBBtn).filter({ id: 'remove' }).simulate('click');
+            expect(wrapper.state().todos).toEqual([{ id: 1 }]);
+        })
+        it('should increment todo id in state when button is clicked', () => {
+            wrapper.find(MDBBtn).filter({ id: 'clear' }).simulate('click');
+            expect(wrapper.state().todos).toEqual([]);
 
-        wrapper.setState({ todos: [{ id: 1 }, { id: 2 }] });
-        wrapper.find(MDBBtn).filter({ id: 'clear' }).simulate('click');
-        expect(wrapper.state().todos).toEqual([]);
+            wrapper.setState({ todos: [{ id: 1 }, { id: 2 }] });
+            wrapper.find(MDBBtn).filter({ id: 'clear' }).simulate('click');
+            expect(wrapper.state().todos).toEqual([]);
+        })});
+    describe('<App /> rendering', () => {
+        let wrapper;
+        beforeEach(() => {
+            wrapper = shallow(<App />);
+        });
+        it('should render no cards when state todos is empty', () => {
+            expect(wrapper.find(TaskCard)).toHaveLength(0);
+        });
+        it('should render cards when state todos is not empty', () => {
+            wrapper.setState({ todos: [{ id: 1 }, { id: 2 }] });
+            expect(wrapper.find(TaskCard)).toHaveLength(2);
+            wrapper.setState({ todos: [{ id: 1 }] });
+            expect(wrapper.find(TaskCard)).toHaveLength(1);
+        });
     });
 });
 
-describe('<App />', () => {
-    let wrapper;
-    beforeEach(() => {
-        wrapper = shallow(<App />);
-    });
-    it('should render no cards when state todos is empty', () => {
-        expect(wrapper.find(TaskCard)).toHaveLength(0);
-    });
-    it('should render cards when state todos is not empty', () => {
-        wrapper.setState({ todos: [{ id: 1 }, { id: 2 }] });
-        expect(wrapper.find(TaskCard)).toHaveLength(2);
-        wrapper.setState({ todos: [{ id: 1 }] });
-        expect(wrapper.find(TaskCard)).toHaveLength(1);
-    });
-});
+
