@@ -18,18 +18,21 @@ class App extends Component {
     this.setState({todos: []});
   }
   render() {
+    const { state: {todos},
+      addTodo, removeTodo, clearTodos
+    } = this;
     return (
       <div>
         <header className="d-flex justify-content-center">
           <h1 className="h1-responsive font-weight-bold blue-text mt-3">TODO APP</h1>
         </header>
         <ControlButtons 
-          add={this.addTodo} 
-          remove={this.removeTodo} 
-          clear={this.clearTodos} 
+          add={addTodo} 
+          remove={removeTodo} 
+          clear={clearTodos} 
         />
         <div className='mt-3 h-100 d-flex flex-column align-items-center'>
-          {this.state.todos.map(todo => <TaskCard id={todo.id} key={todo.id}/>)}
+          {todos.map(({id}) => <TaskCard id={id} key={id}/>)}
         </div>
       </div>
     );
