@@ -36,7 +36,8 @@ describe('<App />', () => {
             wrapper.setState({ todos: [{ id: 1 }, { id: 2 }] });
             wrapper.find(MDBBtn).filter({ id: 'clear' }).simulate('click');
             expect(wrapper.state().todos).toEqual([]);
-        })});
+        })
+    });
     describe('<App /> rendering', () => {
         let wrapper;
         beforeEach(() => {
